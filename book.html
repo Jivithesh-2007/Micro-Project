@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #eef4ff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header {
+      background: #2563eb;
+      text-align: center;
+      padding: 18px;
+      color: white;
+    }
+
+    header h1 { font-size: 1.8rem; }
+
+    .back {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 22px;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    }
+
+    h2 {
+      color: #1e293b;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 1.4rem;
+    }
+
+    label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+
+    select, input {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
+    }
+
+    .slot-area {
+      margin-top: 20px;
+    }
+
+    .slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .slot {
+      padding: 10px 14px;
+      background: #e0eaff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #2563eb;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    .slot:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    .slot.active {
+      background: #2563eb;
+      color: white;
+      border-color: #1d4ed8;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      background: #2563eb;
+      color: white;
+      padding: 12px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Book Appointment</h1>
+</header>
+
+<a href="main.html" class="back">← Back</a>
+
+<div class="container">
+
+  <h2>Schedule Your Visit</h2>
+
+  <label>Patient Name</label>
+  <input type="text" id="pname" placeholder="Enter your name">
+
+  <label>Select Doctor</label>
+  <select id="doctor">
+    <option value="" disabled selected>-- Choose a Doctor --</option>
+    <option>Dr. Ananya Rao - General Physician</option>
+    <option>Dr. Karthik Menon - Cardiologist</option>
+    <option>Dr. Priya S - Dermatologist</option>
+    <option>Dr. Ramesh Iyer - Orthopaedic</option>
+    <option>Dr. Meera Nair - Pediatrician</option>
+  </select>
+
+  <label>Select Date</label>
+  <input type="date" id="date">
+
+  <div class="slot-area">
+    <label>Select Time Slot</label>
+    <div class="slots" id="slotBox"></div>
+  </div>
+
+  <button onclick="confirmBooking()">Confirm Appointment</button>
+
+</div>
+
+<footer>
+  © 2025 Healthcare Appointment System
+</footer>
+
+<script>
+  // Generate Time Slots
+  const timeSlots = [
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
+    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
+    "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM",
+    "04:00 PM", "04:30 PM", "05:00 PM"
+  ];
+
+  const slotBox = document.getElementById("slotBox");
+  let selectedSlot = "";
+
+  function loadSlots() {
+    slotBox.innerHTML = "";
+    timeSlots.forEach(t => {
+      const div = document.createElement("div");
+      div.classList.add("slot");
+      div.textContent = t;
+
+      div.onclick = () => {
+        document.querySelectorAll(".slot").forEach(s => s.classList.remove("active"));
+        div.classList.add("active");
+        selectedSlot = t;
+      };
+
+      slotBox.appendChild(div);
+    });
+  }
+
+  loadSlots();
+
+  // Confirm Booking
+  function confirmBooking() {
+    let name = document.getElementById("pname").value;
+    let doc = document.getElementById("doctor").value;
+    let date = document.getElementById("date").value;
+
+    if (!name || !doc || !date || !selectedSlot) {
+      alert("Please fill all fields!");
+      return;
+    }
+
+    alert(
+      "Appointment Confirmed!\n\n" +
+      "Patient: " + name + "\n" +
+      "Doctor: " + doc + "\n" +
+      "Date: " + date + "\n" +
+      "Time: " + selectedSlot
+    );
+  }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Healthcare Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:'Poppins';
+  background:#eef4ff;
+}
+
+header{
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding-bottom:10px;
+}
+
+.top-header{
+  padding:1.2rem;
+}
+
+.navbar{
+  background:#1d4ed8;
+  padding:0.8rem 1.5rem;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+nav a{
+  color:#e0eaff;
+  margin:0 1rem;
+  text-decoration:none;
+  font-weight:500;
+}
+
+nav a:hover{
+  text-decoration:underline;
+  color:white;
+}
+
+#datetime{
+  background:white;
+  color:#1d4ed8;
+  padding:6px 12px;
+  border-radius:6px;
+  font-weight:600;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  padding:30px;
+}
+
+.card{
+  background:white;
+  border-radius:14px;
+  padding:25px;
+  box-shadow:0px 4px 12px rgba(0,0,0,0.12);
+  border-top:6px solid #2563eb;
+}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.metric{
+  margin-top:12px;
+  font-size:2rem;
+  font-weight:700;
+  color:#1e293b;
+}
+
+/* NEW SECTIONS */
+.section{
+  background:white;
+  border-radius:14px;
+  padding:25px;
+  margin:0 30px 25px 30px;
+  box-shadow:0px 4px 12px rgba(0,0,0,0.12);
+}
+
+.section h2{
+  margin-bottom:12px;
+  color:#1e293b;
+}
+
+.team-list{
+  margin-top:10px;
+  list-style:none;
+  padding-left:0;
+}
+
+.team-list li{
+  padding:6px 0;
+  font-weight:600;
+  color:#1d4ed8;
+}
+
+.doctor-list{
+  list-style:none;
+  padding-left:0;
+}
+
+.doctor-list li{
+  padding:6px 0;
+  border-bottom:1px solid #ddd;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  background:#1d4ed8;
+  padding:15px;
+  color:white;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top-header">
+    <h1>Healthcare Appointment Dashboard</h1>
+    <p>Live Patient & Appointment Overview</p>
+  </div>
+
+  <div class="navbar">
+    <nav>
+      <div>
+        <a href="#"><i class="fa-solid fa-house-medical"></i> Home</a>
+        <a href="analytics.html"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a href="doctors.html"><i class="fa-solid fa-user-doctor"></i> Doctors</a>
+        <a href="book.html"><i class="fa-solid fa-calendar-plus"></i> Book</a>
+      </div>
+      <span id="datetime"></span>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN DASHBOARD -->
+<main class="dashboard">
+
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-user-doctor fa-2x" style="color:#2563eb;"></i>
+      <h2>Available Doctors</h2>
+    </div>
+    <div class="metric" id="doc">12</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-calendar-check fa-2x" style="color:#2563eb;"></i>
+      <h2>Today's Appointments</h2>
+    </div>
+    <div class="metric" id="appt">37</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-hospital-user fa-2x" style="color:#2563eb;"></i>
+      <h2>New Patients</h2>
+    </div>
+    <div class="metric" id="pat">19</div>
+  </div>
+
+</main>
+
+<!-- ABOUT THE SYSTEM -->
+<div class="section">
+  <h2><i class="fa-solid fa-circle-info"></i> About This System</h2>
+  <p>
+    This Healthcare Appointment Dashboard is a simple front-end project created to demonstrate how 
+    appointments, doctor records, and patient details can be displayed using basic HTML, CSS, and JavaScript.
+    It is designed to be clean, easy to understand, and suitable for academic presentation.
+  </p>
+</div>
+
+<!-- DOCTORS LIST -->
+<div class="section">
+  <h2><i class="fa-solid fa-stethoscope"></i> Doctors Available Today</h2>
+  <ul class="doctor-list">
+    <li>Dr. Ananya Rao — General Medicine</li>
+    <li>Dr. Karthik Menon — Cardiology</li>
+    <li>Dr. Priya Sundar — Dermatology</li>
+    <li>Dr. Ajay Kumar — Neurology</li>
+    <li>Dr. Meera Nair — Orthopedics</li>
+    <li>Dr. Devika Iyer — Pediatrics</li>
+  </ul>
+</div>
+
+<!-- TEAM SECTION -->
+<div class="section">
+  <h2><i class="fa-solid fa-users"></i> Project Developed By</h2>
+  <ul class="team-list">
+    <li>Jivithesh</li>
+    <li>Viviyan Peter</li>
+    <li>Mithun Chakravarthy</li>
+    <li>Roshan</li>
+  </ul>
+</div>
+
+<footer>
+  © 2025 Healthcare Appointment Dashboard — Developed by Our Team
+</footer>
+
+<script>
+setInterval(()=>{
+  document.getElementById("datetime").innerHTML = new Date().toLocaleString();
+},1000);
+</script>
+
+</body>
+</html>

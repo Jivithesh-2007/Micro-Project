@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Dashboard | Doctors</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #eef4ff;
+    }
+
+    header {
+      background: #2563eb;
+      padding: 18px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 { font-size: 1.8rem; }
+
+    .back-btn {
+      display: inline-block;
+      margin: 18px;
+      padding: 10px 22px;
+      background: #2563eb;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
+
+    .doctor-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .doctor-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      transition: 0.3s ease;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .doc-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .doc-avatar {
+      width: 60px;
+      height: 60px;
+      background: #2563eb;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .doc-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .speciality {
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      background: #e0eaff;
+      color: #2563eb;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+
+    .book-btn {
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .book-btn:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Available Doctors</h1>
+</header>
+
+<a href="main.html" class="back-btn">← Back to Dashboard</a>
+
+<div class="container">
+
+  <div class="search-box">
+    <input type="text" id="searchDoc" placeholder="Search doctor by name or speciality...">
+  </div>
+
+  <div class="doctor-list" id="doctorList"></div>
+
+</div>
+
+<script>
+  const doctors = [
+    { name: "Dr. Ananya Rao", speciality: "General Physician" },
+    { name: "Dr. Karthik Menon", speciality: "Cardiologist" },
+    { name: "Dr. Priya S", speciality: "Dermatologist" },
+    { name: "Dr. Ramesh Iyer", speciality: "Orthopedic" },
+    { name: "Dr. Meera Nair", speciality: "Pediatrician" },
+    { name: "Dr. Sanjay Kumar", speciality: "ENT Specialist" },
+    { name: "Dr. Dhanush Rao", speciality: "Neurologist" }
+  ];
+
+  function renderDoctors(filter = "") {
+    const list = document.getElementById("doctorList");
+    list.innerHTML = "";
+
+    doctors
+      .filter(doc => doc.name.toLowerCase().includes(filter) || doc.speciality.toLowerCase().includes(filter))
+      .forEach(doc => {
+        const initials = doc.name.split(" ").map(n => n[0]).slice(0,2).join("");
+
+        list.innerHTML += `
+          <div class="doctor-card">
+            <div class="doc-header">
+              <div class="doc-avatar">${initials}</div>
+              <div>
+                <div class="doc-name">${doc.name}</div>
+                <div class="speciality">${doc.speciality}</div>
+              </div>
+            </div>
+            <div class="tag">${doc.speciality}</div>
+            <button class="book-btn" onclick="book('${doc.name}')">Book Appointment</button>
+          </div>
+        `;
+      });
+  }
+
+  function book(name) {
+    alert("Booking with " + name);
+    window.location.href = "book.html";
+  }
+
+  document.getElementById("searchDoc").addEventListener("input", e => {
+    renderDoctors(e.target.value.toLowerCase());
+  });
+
+  renderDoctors();
+</script>
+
+</body>
+</html>

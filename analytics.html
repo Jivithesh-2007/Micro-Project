@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthcare Dashboard | Analytics</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom right, #e0f2fe, #dbeafe);
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    a.back {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 22px;
+      background-color: #2563eb;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    main {
+      display: grid;
+      grid-template-areas:
+        "bar bar"
+        "line line"
+        "pie doughnut"
+        "area area";
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      padding: 30px;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .analytics {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+
+    .analytics h2 {
+      color: #2563eb;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 330px !important;
+    }
+
+    footer {
+      text-align: center;
+      background: #2563eb;
+      color: white;
+      padding: 12px;
+      margin-top: 35px;
+    }
+
+    .bar {
+      grid-area: bar;
+    }
+
+    .line {
+      grid-area: line;
+    }
+
+    .pie {
+      grid-area: pie;
+    }
+
+    .doughnut {
+      grid-area: doughnut;
+    }
+
+    .area {
+      grid-area: area;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        grid-template-areas:
+          "bar"
+          "line"
+          "pie"
+          "doughnut"
+          "area";
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="main.html" class="back">← Back to Dashboard</a>
+
+  <main>
+    <!-- APPOINTMENT ACTIVITY -->
+    <div class="analytics bar">
+      <h2>Weekly Appointment Overview</h2>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <!-- DAILY TRENDS -->
+    <div class="analytics line">
+      <h2>Daily Patient Flow</h2>
+      <canvas id="lineChart"></canvas>
+    </div>
+
+    <!-- APPOINTMENT STATUS -->
+    <div class="analytics pie">
+      <h2>Appointment Status Breakdown</h2>
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <!-- DOCTOR DISTRIBUTION -->
+    <div class="analytics doughnut">
+      <h2>Doctors by Speciality</h2>
+      <canvas id="doughnutChart"></canvas>
+    </div>
+
+    <!-- MONTHLY GROWTH -->
+    <div class="analytics area">
+      <h2>Monthly Appointment Growth</h2>
+      <canvas id="areaChart"></canvas>
+    </div>
+  </main>
+
+  <footer>© 2025 Healthcare Dashboard | Analytics Overview</footer>
+
+  <script>
+    // Bar Chart - Weekly Appointments
+    new Chart(document.getElementById("barChart"), {
+      type: "bar",
+      data: {
+        labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        datasets: [
+          {
+            label: "Appointments",
+            data: [42, 50, 48, 60, 72, 55, 40],
+            backgroundColor: "#2563eb"
+          },
+          {
+            label: "New Patients",
+            data: [12, 15, 11, 18, 20, 15, 10],
+            backgroundColor: "#16a34a"
+          },
+        ],
+      },
+      options: {
+        plugins: { legend: { position: "bottom" } },
+        scales: { y: { beginAtZero: true } },
+      },
+    });
+
+    // Line Chart – Patient Flow
+    new Chart(document.getElementById("lineChart"), {
+      type: "line",
+      data: {
+        labels: ["9AM", "11AM", "1PM", "3PM", "5PM", "7PM"],
+        datasets: [
+          {
+            label: "Patients in Clinic",
+            data: [10, 18, 22, 26, 20, 15],
+            borderColor: "#ea580c",
+            backgroundColor: "#ea580c20",
+            fill: true,
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        plugins: { legend: { position: "bottom" } },
+      },
+    });
+
+    // Pie Chart - Appointment Status
+    new Chart(document.getElementById("pieChart"), {
+      type: "pie",
+      data: {
+        labels: ["Completed", "Cancelled", "Upcoming"],
+        datasets: [
+          {
+            data: [55, 10, 35],
+            backgroundColor: ["#16a34a", "#ef4444", "#facc15"],
+          },
+        ],
+      },
+      options: { plugins: { legend: { position: "bottom" } } },
+    });
+
+    // Doughnut – Doctors by Specialty
+    new Chart(document.getElementById("doughnutChart"), {
+      type: "doughnut",
+      data: {
+        labels: ["General", "Cardiology", "Dermatology", "Pediatrics"],
+        datasets: [
+          {
+            data: [35, 20, 15, 30],
+            backgroundColor: ["#2563eb", "#f43f5e", "#10b981", "#f97316"],
+          },
+        ],
+      },
+      options: { plugins: { legend: { position: "bottom" } } },
+    });
+
+    // Area Chart – Monthly Growth
+    new Chart(document.getElementById("areaChart"), {
+      type: "line",
+      data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+        datasets: [
+          {
+            label: "Appointments",
+            data: [220, 260, 310, 350, 400, 420, 460],
+            borderColor: "#2563eb",
+            backgroundColor: "#2563eb30",
+            fill: true,
+            tension: 0.4,
+          },
+        ],
+      },
+      options: { plugins: { legend: { position: "bottom" } } },
+    });
+  </script>
+</body>
+
+</html>

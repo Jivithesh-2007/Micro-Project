@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#eef4ff;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    form{
+      background:white;
+      padding:35px;
+      width:350px;
+      border-radius:14px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+
+    h1{ color:#2563eb; margin-bottom:20px;}
+
+    input{
+      width:90%;
+      padding:12px;
+      margin:10px 0;
+      border-radius:8px;
+      border:1px solid #ccc;
+    }
+
+    button{
+      width:95%;
+      padding:12px;
+      border:none;
+      background:#2563eb;
+      color:white;
+      font-weight:600;
+      border-radius:8px;
+      margin-top:8px;
+    }
+
+    a{
+      text-decoration:none;
+      color:#2563eb;
+      font-weight:600;
+    }
+  </style>
+</head>
+
+<body>
+
+<form action="main.html" onsubmit="return validate()">
+  <h1>Login</h1>
+
+  <input type="text" placeholder="Email" id="email" required>
+  <input type="password" placeholder="Password" id="pwd" required>
+
+  <button type="submit">Login</button>
+
+  <p>Don't have an account? <a href="signup.html">Register</a></p>
+</form>
+
+<script>
+function validate(){
+  let u = localStorage.getItem("hc_user");
+  let p = localStorage.getItem("hc_pass");
+
+  if(document.getElementById("email").value === u &&
+     document.getElementById("pwd").value === p){
+      alert("Login Success!");
+      return true;
+  }
+  alert("Invalid Credentials!");
+  return false;
+}
+</script>
+
+</body>
+</html>
